@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NU.nl Oranje Opstellingbouwer WK 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Palanquin:wght@400;500;600;700&family=Palanquin+Dark:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+  :root {
+    --nu-blauw: #00004f;
+    --nu-rood:  #e00613;
+    --oranje:   #f2aa73;
+    --wit:      #ffffff;
+    --lichtgrijs: #f5f5f7;
+    --midgrijs:   #e4e4ec;
+    --border:     #d2d2de;
+    --tekst:      #111128;
+    --subtekst:   #55556a;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--lichtgrijs);
+    color: var(--tekst);
+    font-family: 'Palanquin', sans-serif;
+    font-size: 14px;
+    min-height: 100vh;
+  }
+
+  /* ═══════════════════════════════════════
+     HEADER — NU.nl style
+  ═══════════════════════════════════════ */
+  header {
+    background: var(--wit);
+    border-bottom: 2px solid var(--border);
+    padding: 0 28px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    box-shadow: 0 1px 4px rgba(0,0,60,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+
+  .nu-logo img {
+    height: 48px;
+    width: auto;
+    display: block;
+  }
+
+  .header-divider {
+    width: 1px;
+    height: 32px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+
+  .header-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .header-meta-title {
+    font-family: 'Palanquin Dark', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--nu-blauw);
+    letter-spacing: 0;
+    line-height: 1.1;
+  }
+  .header-meta-sub {
+    font-size: 12px;
+    color: var(--subtekst);
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  .header-badge {
+    margin-left: auto;
+    background: var(--nu-rood);
+    color: var(--wit);
+    font-size: 11px;
+    font-weight: 700;
+    font-family: 'Palanquin Dark', sans-serif;
+    padding: 5px 12px;
+    border-radius: 3px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  /* ═══════════════════════════════════════
+     BREADCRUMB
+  ═══════════════════════════════════════ */
+  .breadcrumb {
+    background: var(--wit);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 28px;
+    font-size: 12px;
+    color: var(--subtekst);
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .breadcrumb a {
+    color: var(--nu-blauw);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .breadcrumb a:hover { text-decoration: underline; }
+
+  /* ═══════════════════════════════════════
+     APP LAYOUT
+  ═══════════════════════════════════════ */
+  .app-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    max-width: 1160px;
+    margin: 20px auto;
+    padding: 0 20px 40px;
+    align-items: start;
+  }
+
+  /* ═══════════════════════════════════════
+     CARDS (sidebar)
+  ═══════════════════════════════════════ */
+  .sidebar { display: flex; flex-direction: column; gap: 14px; }
+
+  .card {
+    background: var(--wit);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,60,0.05);
+    overflow: hidden;
+  }
+  .card-header {
+    background: var(--nu-blauw);
+    color: var(--wit);
+    font-family: 'Palanquin Dark', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 8px 14px;
+    letter-spacing: 0.6px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+  .card-body { padding: 12px 14px; }
+
+  /* ═══════════════════════════════════════
+     FORMATION BUTTONS
+  ═══════════════════════════════════════ */
+  .formation-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px;
+  }
+  .formation-btn {
+    background: var(--lichtgrijs);
+    border: 1.5px solid var(--border);
+    color: var(--nu-blauw);
+    font-family: 'Palanquin', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 9px 6px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.12s;
+    text-align: center;
+  }
+  .formation-btn:hover { border-color: var(--nu-rood); color: var(--nu-rood); background: #fff8f8; }
+  .formation-btn.active { background: var(--nu-blauw); border-color: var(--nu-blauw); color: var(--wit); }
+
+  /* ═══════════════════════════════════════
+     PLAYER ROWS
+  ═══════════════════════════════════════ */
+  .player-row {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--midgrijs);
+  }
+  .player-row:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+  .player-row label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--subtekst);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .pos-badge {
+    background: var(--nu-rood);
+    color: var(--wit);
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 5px;
+    border-radius: 2px;
+    letter-spacing: 0.3px;
+  }
+  .player-select {
+    width: 100%;
+    background: var(--wit);
+    border: 1.5px solid var(--border);
+    color: var(--tekst);
+    font-family: 'Palanquin', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 6px 24px 6px 7px;
+    border-radius: 2px;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='5'%3E%3Cpath d='M0 0l4.5 5L9 0z' fill='%2300004f'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    transition: border-color 0.12s;
+  }
+  .player-select:focus { outline: none; border-color: var(--nu-blauw); }
+
+  /* ═══════════════════════════════════════
+     PITCH + CANVAS AREA
+  ═══════════════════════════════════════ */
+  .pitch-card {
+    background: var(--wit);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,60,0.05);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .pitch-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-self: stretch;
+  }
+
+  /* VIEW SWITCHER */
+  .view-switch {
+    display: flex;
+    background: var(--midgrijs);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .view-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 14px;
+    font-family: 'Palanquin Dark', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--subtekst);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .view-btn.active {
+    background: var(--nu-blauw);
+    color: var(--wit);
+  }
+
+  .formation-tag {
+    background: var(--nu-blauw);
+    color: var(--wit);
+    font-family: 'Palanquin Dark', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+  }
+
+  /* CANVAS RENDERING */
+  #lineup-render {
+    width: 560px;
+    height: 560px;
+    position: relative;
+    overflow: hidden; 
+    flex-shrink: 0;
+    border-radius: 6px;
+    box-shadow: 0 4px 20px rgba(0,0,60,0.2);
+  }
+
+  /* INSTA VIEW OVERRIDES */
+  #lineup-render.view-insta {
+    height: 573px; /* 560 width met ratio voor 1080x1106 */
+  }
+
+  /* ZOOM TRUC */
+  .zoom-wrapper {
+    position: absolute;
+    width: 112%;   
+    height: 112%;  
+    top: -6%;      
+    left: -6%;     
+  }
+
+  /* INSTA ZOOM TRUC OVERRIDE */
+  #lineup-render.view-insta .zoom-wrapper {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+
+  .pitch-inner {
+    position: absolute;
+    inset: 0;
+  }
+  
+  .pitch-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  #tokens-layer {
+    position: absolute;
+    inset: 0;
+    overflow: visible;
+    pointer-events: none;
+  }
+
+  /* ═══════════════════════════════════════
+     PLAYER TOKENS
+  ═══════════════════════════════════════ */
+  .player-token {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .token-rendered-img {
+    width: 120px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+    transition: opacity 0.2s;
+  }
+
+  /* ═══════════════════════════════════════
+     ACTION BUTTONS
+  ═══════════════════════════════════════ */
+  .action-bar {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn-download {
+    background: var(--nu-rood);
+    color: var(--wit);
+    font-family: 'Palanquin Dark', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 11px 20px;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.12s;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 2px 8px rgba(224,6,19,0.25);
+  }
+  .btn-download:hover { background: #b80010; transform: translateY(-1px); }
+
+  .btn-insta {
+    background: #E1306C; /* Insta Kleur */
+    box-shadow: 0 2px 8px rgba(225,48,108,0.25);
+  }
+  .btn-insta:hover { background: #C13584; }
+
+  .btn-reset {
+    background: var(--wit);
+    color: var(--nu-blauw);
+    font-family: 'Palanquin', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 11px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+  .btn-reset:hover { border-color: var(--nu-blauw); }
+
+  /* ═══════════════════════════════════════
+     TOAST
+  ═══════════════════════════════════════ */
+  .toast {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
+    background: var(--nu-blauw);
+    color: var(--wit);
+    font-family: 'Palanquin', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+    padding: 11px 18px;
+    border-radius: 3px;
+    border-left: 4px solid var(--nu-rood);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    transform: translateY(70px);
+    opacity: 0;
+    transition: all 0.25s ease;
+    z-index: 999;
+  }
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ═══════════════════════════════════════
+     FOOTER
+  ═══════════════════════════════════════ */
+  footer {
+    background: var(--nu-blauw);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    font-size: 11px;
+    padding: 14px;
+    margin-top: 20px;
+    border-top: 3px solid var(--nu-rood);
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--lichtgrijs); }
+  ::-webkit-scrollbar-thumb { background: var(--nu-blauw); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<!-- ═══ HEADER ═══ -->
+<header>
+  <a class="nu-logo" href="#" title="NU.nl">
+    <img src="Nu-nl-logo.png" alt="NU.nl Logo">
+  </a>
+
+  <div class="header-divider"></div>
+
+  <div class="header-meta">
+    <div class="header-meta-title">Oranje Opstellingbouwer</div>
+    <div class="header-meta-sub">WK 2026 · Bouw jouw ideale elftal</div>
+  </div>
+
+  <div class="header-badge">⚽ WK 2026</div>
+</header>
+
+<!-- ═══ BREADCRUMB ═══ -->
+<div class="breadcrumb">
+  <a href="#">Sport</a> › <a href="#">Voetbal</a> › <a href="#">Oranje</a> › Opstellingbouwer WK 2026
+</div>
+
+<!-- ═══ APP ═══ -->
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="card">
+      <div class="card-header">⬡ Kies opstelling</div>
+      <div class="card-body">
+        <div class="formation-grid">
+          <button class="formation-btn active" data-formation="4-3-3F">4-3-3 (breed)</button>
+          <button class="formation-btn" data-formation="4-3-3B">4-3-3 (piramide)</button>
+          <button class="formation-btn" data-formation="4-4-2">4-4-2</button>
+          <button class="formation-btn" data-formation="5-3-2">5-3-2</button>
+          <button class="formation-btn" data-formation="3-4-3">3-4-3</button>
+          <button class="formation-btn" data-formation="4-1-2-1-2">4-1-2-1-2</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">👕 Selecteer spelers</div>
+      <div class="card-body">
+        <div id="player-slots"></div>
+      </div>
+    </div>
+
+  </aside>
+
+  <!-- PITCH -->
+  <div class="pitch-card">
+    <div class="pitch-topbar">
+      <!-- VIEW SWITCHER -->
+      <div class="view-switch">
+        <button class="view-btn active" data-view="nu">NU.nl</button>
+        <button class="view-btn" data-view="insta">Insta</button>
+      </div>
+      <span class="formation-tag" id="formation-tag">4-3-3</span>
+    </div>
+
+    <div id="lineup-render">
+      <!-- DE ZOOM WRAPPER -->
+      <div class="zoom-wrapper">
+        <div class="pitch-inner">
+          <img class="pitch-bg" id="pitch-bg-img" src="images/Achtergrond.png" alt="Voetbalveld"
+            onerror="this.style.display='none';this.parentElement.style.background='linear-gradient(180deg,#0a1e5e 0%,#14348a 50%,#0a1e5e 100%)'">
+        </div>
+        <div id="tokens-layer"></div>
+      </div>
+    </div>
+
+    <div class="action-bar">
+      <button class="btn-download" onclick="downloadPng('nu')">⬇ Export NU.nl</button>
+      <button class="btn-download btn-insta" onclick="downloadPng('insta')">⬇ Export Insta</button>
+      <button class="btn-reset" onclick="resetAll()">↺ Reset</button>
+    </div>
+  </div>
+
+</div>
+
+<footer>© NU.nl · Oranje Opstellingbouwer WK 2026</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+// ══════════════════════════════════════════
+// DATA
+// ══════════════════════════════════════════
+const PLAYERS = {
+  GK:  [
+    {name:"Mark Flekken",          short:"Flekken"},
+    {name:"Robin Roefs",           short:"Roefs"},
+    {name:"Bart Verbruggen",       short:"Verbruggen"},
+  ],
+  DEF: [
+    {name:"Nathan Aké",            short:"Aké"},
+    {name:"Virgil van Dijk",       short:"Van Dijk"},
+    {name:"Denzel Dumfries",       short:"Dumfries"},
+    {name:"Jorrel Hato",           short:"Hato"},
+    {name:"Jan Paul van Hecke",    short:"Van Hecke"},
+    {name:"Jurriën Timber",        short:"J. Timber"},
+    {name:"Micky van de Ven",      short:"Van de Ven"},
+  ],
+  MID: [
+    {name:"Ryan Gravenberch",      short:"Gravenberch"},
+    {name:"Frenkie de Jong",       short:"De Jong"},
+    {name:"Justin Kluivert",       short:"Kluivert"},
+    {name:"Teun Koopmeiners",      short:"Koopmeiners"},
+    {name:"Tijjani Reijnders",     short:"Reijnders"},
+    {name:"Marten de Roon",        short:"De Roon"},
+    {name:"Guus Til",              short:"Til"},
+    {name:"Quinten Timber",        short:"Q. Timber"},
+    {name:"Mats Wieffer",          short:"Wieffer"},
+  ],
+  FWD: [
+    {name:"Brian Brobbey",         short:"Brobbey"},
+    {name:"Memphis Depay",         short:"Memphis"},
+    {name:"Cody Gakpo",            short:"Gakpo"},
+    {name:"Noa Lang",              short:"Lang"},
+    {name:"Donyell Malen",         short:"Malen"},
+    {name:"Crysencio Summerville", short:"Summerville"},
+    {name:"Wout Weghorst",         short:"Weghorst"},
+  ]
+};
+
+const ALL = [
+  ...PLAYERS.GK.map(p=>({...p,cat:"GK"})),
+  ...PLAYERS.DEF.map(p=>({...p,cat:"DEF"})),
+  ...PLAYERS.MID.map(p=>({...p,cat:"MID"})),
+  ...PLAYERS.FWD.map(p=>({...p,cat:"FWD"})),
+];
+
+// ══════════════════════════════════════════
+// FORMATION DEFINITIONS
+// ══════════════════════════════════════════
+const FORMATIONS = {
+  "4-3-3F": {
+    label:"4-3-3",
+    slots:[
+      {id:"gk",  label:"GK",   pos:"GK",  x:50, y:80},
+      {id:"rb",  label:"RB",   pos:"DEF", x:84, y:64},
+      {id:"rcb", label:"CV R", pos:"DEF", x:63, y:64},
+      {id:"lcb", label:"CV L", pos:"DEF", x:37, y:64},
+      {id:"lb",  label:"LB",   pos:"DEF", x:16, y:64},
+      {id:"rm",  label:"RM",   pos:"MID", x:73, y:40},
+      {id:"cm",  label:"CM",   pos:"MID", x:50, y:42},
+      {id:"lm",  label:"LM",   pos:"MID", x:27, y:40},
+      {id:"rw",  label:"RW",   pos:"FWD", x:79, y:18},
+      {id:"st",  label:"SP",   pos:"FWD", x:50, y:18},
+      {id:"lw",  label:"LW",   pos:"FWD", x:21, y:18},
+    ]
+  },
+  "4-3-3B": {
+    label:"4-3-3",
+    slots:[
+      {id:"gk",  label:"GK",   pos:"GK",  x:50, y:80},
+      {id:"rb",  label:"RB",   pos:"DEF", x:84, y:64},
+      {id:"rcb", label:"CV R", pos:"DEF", x:63, y:64},
+      {id:"lcb", label:"CV L", pos:"DEF", x:37, y:64},
+      {id:"lb",  label:"LB",   pos:"DEF", x:16, y:64},
+      {id:"rcm", label:"CM R", pos:"MID", x:67, y:42},
+      {id:"cam", label:"CAM",  pos:"MID", x:50, y:36},
+      {id:"lcm", label:"CM L", pos:"MID", x:33, y:42},
+      {id:"rw",  label:"RW",   pos:"FWD", x:76, y:19},
+      {id:"st",  label:"SP",   pos:"FWD", x:50, y:17},
+      {id:"lw",  label:"LW",   pos:"FWD", x:24, y:19},
+    ]
+  },
+  "4-4-2": {
+    label:"4-4-2",
+    slots:[
+      {id:"gk",  label:"GK",   pos:"GK",  x:50, y:80},
+      {id:"rb",  label:"RB",   pos:"DEF", x:84, y:64},
+      {id:"rcb", label:"CV R", pos:"DEF", x:63, y:64},
+      {id:"lcb", label:"CV L", pos:"DEF", x:37, y:64},
+      {id:"lb",  label:"LB",   pos:"DEF", x:16, y:64},
+      {id:"rm",  label:"RM",   pos:"MID", x:81, y:40},
+      {id:"rcm", label:"CM R", pos:"MID", x:59, y:40},
+      {id:"lcm", label:"CM L", pos:"MID", x:41, y:40},
+      {id:"lm",  label:"LM",   pos:"MID", x:19, y:40},
+      {id:"rst", label:"SP R", pos:"FWD", x:62, y:17},
+      {id:"lst", label:"SP L", pos:"FWD", x:38, y:17},
+    ]
+  },
+  "5-3-2": {
+    label:"5-3-2",
+    slots:[
+      {id:"gk",  label:"GK",   pos:"GK",  x:50, y:80},
+      {id:"rwb", label:"RWB",  pos:"DEF", x:84, y:56},
+      {id:"rcb", label:"CV R", pos:"DEF", x:67, y:59},
+      {id:"cb",  label:"CV",   pos:"DEF", x:50, y:60},
+      {id:"lcb", label:"CV L", pos:"DEF", x:33, y:59},
+      {id:"lwb", label:"LWB",  pos:"DEF", x:16, y:56},
+      {id:"rm",  label:"CM R", pos:"MID", x:68, y:38},
+      {id:"cm",  label:"CM",   pos:"MID", x:50, y:38},
+      {id:"lm",  label:"CM L", pos:"MID", x:32, y:38},
+      {id:"rst", label:"SP R", pos:"FWD", x:62, y:16},
+      {id:"lst", label:"SP L", pos:"FWD", x:38, y:16},
+    ]
+  },
+  "3-4-3": {
+    label:"3-4-3",
+    slots:[
+      {id:"gk",  label:"GK",   pos:"GK",  x:50, y:82},
+      {id:"rcb", label:"CV R", pos:"DEF", x:68, y:60},
+      {id:"cb",  label:"CV",   pos:"DEF", x:50, y:62},
+      {id:"lcb", label:"CV L", pos:"DEF", x:32, y:60},
+      {id:"rm",  label:"RM",   pos:"MID", x:80, y:41},
+      {id:"rcm", label:"CM R", pos:"MID", x:60, y:41},
+      {id:"lcm", label:"CM L", pos:"MID", x:40, y:41},
+      {id:"lm",  label:"LM",   pos:"MID", x:20, y:41},
+      {id:"rw",  label:"RW",   pos:"FWD", x:76, y:21},
+      {id:"st",  label:"SP",   pos:"FWD", x:50, y:18},
+      {id:"lw",  label:"LW",   pos:"FWD", x:24, y:21},
+    ]
+  },
+  "4-1-2-1-2": {
+    label:"4-1-2-1-2",
+    slots:[
+      {id:"gk",  label:"GK",   pos:"GK",  x:50, y:84},
+      {id:"rb",  label:"RB",   pos:"DEF", x:80, y:66},
+      {id:"rcb", label:"CV R", pos:"DEF", x:62, y:67},
+      {id:"lcb", label:"CV L", pos:"DEF", x:38, y:67},
+      {id:"lb",  label:"LB",   pos:"DEF", x:20, y:66},
+      {id:"dm",  label:"DM",   pos:"MID", x:50, y:54},
+      {id:"rcm", label:"CM R", pos:"MID", x:67, y:43},
+      {id:"lcm", label:"CM L", pos:"MID", x:33, y:43},
+      {id:"cam", label:"CAM",  pos:"MID", x:50, y:31},
+      {id:"rst", label:"SP R", pos:"FWD", x:62, y:17},
+      {id:"lst", label:"SP L", pos:"FWD", x:38, y:17},
+    ]
+  }
+};
+
+// ══════════════════════════════════════════
+// STATE — persisted via Netlify Blobs (Cloud)
+// ══════════════════════════════════════════
+let currentFormation = "4-3-3F";
+let currentView = "nu"; // "nu" of "insta"
+let selections = {};   
+
+async function saveState() {
+  try {
+    const payload = { formation: currentFormation, selections, view: currentView };
+    await fetch("/api/state", {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: { "Content-Type": "application/json" }
+    });
+  } catch(e) {
+    console.error("Kon niet opslaan naar de cloud:", e);
+  }
+}
+
+async function loadState() {
+  try {
+    const raw = await fetch("/api/state");
+    const data = await raw.json();
+    
+    // Alleen updaten als er daadwerkelijk data uit de cloud komt
+    if (Object.keys(data).length > 0) {
+      if (data.formation && FORMATIONS[data.formation]) currentFormation = data.formation;
+      if (data.selections && typeof data.selections === "object") selections = data.selections;
+      if (data.view === "nu" || data.view === "insta") currentView = data.view;
+    }
+  } catch(e) {
+    console.error("Kon state niet laden uit de cloud:", e);
+  }
+}
+
+// ══════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════
+async function init() {
+  // We wachten nu tot de data uit de cloud is opgehaald
+  await loadState(); 
+  
+  setupFormationButtons();
+  setupViewSwitcher();
+  renderFormation(currentFormation);
+  
+  // Zorg dat de juiste knoppen actief staan na het inladen
+  document.querySelectorAll(".formation-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.formation === currentFormation);
+  });
+  
+  // Pas direct de juiste view toe
+  const btns = document.querySelectorAll(".view-btn");
+  btns.forEach(b => b.classList.toggle("active", b.dataset.view === currentView));
+  const renderArea = document.getElementById("lineup-render");
+  if (currentView === "insta") {
+    renderArea.classList.add("view-insta");
+  } else {
+    renderArea.classList.remove("view-insta");
+  }
+}
+
+// ══════════════════════════════════════════
+// VIEW SWITCHER
+// ══════════════════════════════════════════
+function setupViewSwitcher() {
+  const btns = document.querySelectorAll(".view-btn");
+  const renderArea = document.getElementById("lineup-render");
+
+  function applyView(viewName) {
+    currentView = viewName;
+    btns.forEach(b => b.classList.toggle("active", b.dataset.view === viewName));
+    if (viewName === "insta") {
+      renderArea.classList.add("view-insta");
+    } else {
+      renderArea.classList.remove("view-insta");
+    }
+    saveState();
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener("click", () => applyView(btn.dataset.view));
+  });
+}
+
+// ══════════════════════════════════════════
+// FORMATION BUTTONS
+// ══════════════════════════════════════════
+function setupFormationButtons() {
+  document.querySelectorAll(".formation-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".formation-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      
+      const currentPlayers = Object.values(selections).filter(Boolean);
+      currentFormation = btn.dataset.formation;
+      
+      selections = {};
+      const newSlots = FORMATIONS[currentFormation].slots;
+      newSlots.forEach((slot, index) => {
+        if (currentPlayers[index]) {
+          selections[slot.id] = currentPlayers[index];
+        }
+      });
+
+      saveState();
+      renderFormation(currentFormation);
+    });
+  });
+}
+
+// ══════════════════════════════════════════
+// RENDER
+// ══════════════════════════════════════════
+function renderFormation(fKey) {
+  const f = FORMATIONS[fKey];
+  document.getElementById("formation-tag").textContent = f.label;
+  buildSlotsSidebar(f.slots);
+  buildTokens(f.slots);
+}
+
+const CAT_LABEL = {GK:"GK", DEF:"Verdediger", MID:"Middenvelder", FWD:"Aanvaller"};
+
+function sortedPlayersFor(prefCat) {
+  return [...ALL.filter(p=>p.cat===prefCat), ...ALL.filter(p=>p.cat!==prefCat)];
+}
+
+function buildSlotsSidebar(slots) {
+  const container = document.getElementById("player-slots");
+  container.innerHTML = "";
+  slots.forEach(slot => {
+    const div = document.createElement("div");
+    div.className = "player-row";
+
+    const lbl = document.createElement("label");
+    lbl.innerHTML = `<span class="pos-badge">${slot.label}</span>${CAT_LABEL[slot.pos]}`;
+
+    const sel = document.createElement("select");
+    sel.className = "player-select";
+    sel.dataset.slotId = slot.id;
+
+    const empty = document.createElement("option");
+    empty.value = ""; empty.textContent = "— Kies speler —";
+    sel.appendChild(empty);
+
+    const sorted = sortedPlayersFor(slot.pos);
+    let sepped = false;
+    sorted.forEach(p => {
+      if (!sepped && p.cat !== slot.pos) {
+        const sep = document.createElement("option");
+        sep.disabled = true; sep.textContent = "──────────────";
+        sel.appendChild(sep);
+        sepped = true;
+      }
+      const opt = document.createElement("option");
+      opt.value = p.name; opt.textContent = p.name;
+      if (selections[slot.id] === p.name) opt.selected = true;
+      sel.appendChild(opt);
+    });
+
+    sel.addEventListener("change", () => {
+      selections[slot.id] = sel.value || undefined;
+      if (!sel.value) delete selections[slot.id];
+      saveState();
+      updateToken(slot.id);
+    });
+
+    div.appendChild(lbl);
+    div.appendChild(sel);
+    container.appendChild(div);
+  });
+}
+
+// ══════════════════════════════════════════
+// TOKENS ON PITCH
+// ══════════════════════════════════════════
+function buildTokens(slots) {
+  const layer = document.getElementById("tokens-layer");
+  layer.innerHTML = "";
+  slots.forEach(slot => {
+    const tok = document.createElement("div");
+    tok.className = "player-token";
+    tok.id = "token-" + slot.id;
+    tok.style.left = slot.x + "%";
+    tok.style.top  = slot.y + "%";
+    
+    // Z-index zorgt ervoor dat spelers vooraan over de achterste vallen
+    tok.style.zIndex = Math.round(slot.y);
+
+    const img = document.createElement("img");
+    img.className = "token-rendered-img";
+    img.alt = slot.label;
+    
+    img.src = "Placeholder.png";
+    img.style.opacity = "0.5";
+
+    tok.appendChild(img);
+    layer.appendChild(tok);
+
+    if (selections[slot.id]) {
+      applyPlayerToToken(tok, selections[slot.id]);
+    }
+  });
+}
+
+function getPhotoPath(playerName) {
+  const p = ALL.find(x => x.name === playerName);
+  if (!p) return null;
+  const slug = p.name.toLowerCase()
+    .normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/\s+/g,"-").replace(/[^a-z0-9-]/g,"");
+  return `images/spelers/${slug}.png`;
+}
+
+function applyPlayerToToken(tok, playerName) {
+  const img = tok.querySelector(".token-rendered-img");
+
+  if (!playerName) {
+    img.src = "Placeholder.png";
+    img.style.opacity = "0.5"; 
+    return;
+  }
+
+  img.style.opacity = "1";
+  
+  const photoPath = getPhotoPath(playerName);
+  const tempImg = new Image();
+  
+  tempImg.onload = () => {
+    img.src = photoPath;
+  };
+  tempImg.onerror = () => {
+    img.src = "Placeholder.png";
+  };
+  tempImg.src = photoPath;
+}
+
+function updateToken(slotId) {
+  const slot = FORMATIONS[currentFormation].slots.find(s => s.id === slotId);
+  if (!slot) return;
+  const tok = document.getElementById("token-" + slotId);
+  if (!tok) return;
+  const playerName = selections[slotId] || "";
+  applyPlayerToToken(tok, playerName);
+}
+
+// ══════════════════════════════════════════
+// DOWNLOAD PNG
+// ══════════════════════════════════════════
+async function downloadPng(format) {
+  showToast("📸 Bezig met genereren...");
+  const el = document.getElementById("lineup-render");
+
+  // Tijdelijk de juiste view afdwingen om de layout kloppend te maken voor de screenshot
+  const originalView = currentView;
+  let targetWidth = 1600;
+  let targetHeight = 1600;
+  let renderHeight = 560;
+  let filename = "oranje-opstelling-wk2026.png";
+
+  if (format === 'insta') {
+    el.classList.add('view-insta');
+    targetWidth = 1080;
+    targetHeight = 1106;
+    renderHeight = 573; // (560 * 1106 / 1080) voor perfecte ratio
+    filename = "oranje-opstelling-wk2026-insta.png";
+  } else {
+    el.classList.remove('view-insta');
+  }
+
+  // DOM tijd geven om eventueel classes te updaten vóór html2canvas begint
+  await new Promise(resolve => setTimeout(resolve, 50));
+
+  try {
+    const canvas = await html2canvas(el, {
+      useCORS: true,
+      allowTaint: true,
+      scale: 3,
+      backgroundColor: "#14348a",
+      logging: false,
+      width: 560,
+      height: renderHeight,
+    });
+
+    // Herstel de view direct naar wat het was voor de gebruiker erop klikte
+    if (originalView === 'insta') {
+      el.classList.add('view-insta');
+    } else {
+      el.classList.remove('view-insta');
+    }
+
+    // Teken het resultaat op de final canvas in de vereiste afmetingen
+    const out = document.createElement("canvas");
+    out.width = targetWidth; 
+    out.height = targetHeight;
+    const ctx = out.getContext("2d");
+    ctx.drawImage(canvas, 0, 0, canvas.width, canvas.height, 0, 0, targetWidth, targetHeight);
+
+    const link = document.createElement("a");
+    link.download = filename;
+    link.href = out.toDataURL("image/png");
+    link.click();
+    showToast("✅ Opgeslagen als PNG!");
+  } catch(err) {
+    console.error(err);
+    showToast("❌ Fout bij downloaden.");
+    // Veiligheidshalve altijd de originele view herstellen bij een fout
+    if (originalView === 'insta') el.classList.add('view-insta');
+    else el.classList.remove('view-insta');
+  }
+}
+
+// ══════════════════════════════════════════
+// RESET
+// ══════════════════════════════════════════
+function resetAll() {
+  selections = {};
+  saveState();
+  renderFormation(currentFormation);
+  showToast("↺ Opstelling gereset");
+}
+
+// ══════════════════════════════════════════
+// TOAST
+// ══════════════════════════════════════════
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 2600);
+}
+
+init();
+</script>
+</body>
+</html>
